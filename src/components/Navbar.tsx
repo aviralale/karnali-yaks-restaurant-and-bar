@@ -4,7 +4,7 @@ import Logo from "../assets/images/logo.png";
 const Navbar = () => {
   return (
     <header>
-      <nav className="fixed w-full">
+      <nav className="sticky w-full">
         <div className="flex justify-between">
           <ul className="flex items-center justify-evenly flex-1">
             <li className="font-semibold">Asian | Mexican Fusion</li>

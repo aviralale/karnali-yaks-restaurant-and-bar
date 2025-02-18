@@ -35,6 +35,10 @@
   transition-timing-function: ease;
 }
 
+body {
+  padding: 0 20px;
+}
+
 h1 {
   font-family: "Casta", "Times New Roman", Times, serif;
 }

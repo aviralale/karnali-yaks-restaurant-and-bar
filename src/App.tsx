@@ -1,14 +1,13 @@
+import { Route, Routes } from "react-router-dom";
 import Layout from "./base/Layout";
-import Logo from "../public/favicon.svg";
+import HomePage from "./base/HomePage";
 
 const App = () => {
   return (
     <Layout>
-      <img src={Logo} width={200} alt="" />
-      <h1 className="text-9xl font-bold">
-        Karnali Yaks Restaurant <em>&</em> Bar
-      </h1>
-      <h1 className="text-5xl font-bold">Opening Soon...</h1>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+      </Routes>
     </Layout>
   );
 };

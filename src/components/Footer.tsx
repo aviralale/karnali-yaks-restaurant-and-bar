@@ -2,76 +2,108 @@ import Logo from "../assets/images/logo.png";
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col items-center justify-center w-full gap-12">
-      <div>
-        <h1 className="text-8xl bold">CONNECT WITH US</h1>
+    <footer className="flex flex-col items-center justify-center w-full gap-8 md:gap-12 px-4 py-8">
+      <div className="text-center">
+        <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold">
+          CONNECT WITH US
+        </h1>
       </div>
-      <div className="flex justify-evenly items-center w-full">
-        <div className="flex flex-col justify-center items-center">
+      <div className="grid grid-cols-1 place-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 w-full max-w-6xl">
+        {/* Logo Section */}
+        <div className="flex flex-col justify-center items-center text-center">
           <img
             src={Logo}
             alt="Karnali Yaks Restaurant and Bar Logo"
-            className="w-20"
+            className="w-16 md:w-20"
           />
-          <h1 className="text-md">Karnali Yaks Restaurant and Bar</h1>
+          <h1 className="text-sm md:text-md mt-2">
+            Karnali Yaks Restaurant and Bar
+          </h1>
         </div>
-        <div className="flex flex-col">
-          <ul>
+        {/* Quick Links */}
+        <div className="flex flex-col items-center md:items-start">
+          <ul className="space-y-2 flex flex-col text-center md:text-left">
             <li>
-              <a href="#">About Us</a>
+              <a href="#" className="hover:underline">
+                About Us
+              </a>
             </li>
             <li>
-              <a href="#">Dishes</a>
+              <a href="#" className="hover:underline">
+                Dishes
+              </a>
             </li>
             <li>
-              <a href="#">Contact</a>
+              <a href="#" className="hover:underline">
+                Contact
+              </a>
             </li>
           </ul>
         </div>
-        <div className="flex flex-col">
-          <ul>
+        {/* Legal */}
+        <div className="flex flex-col items-center md:items-start">
+          <ul className="space-y-2 text-center md:text-left">
             <li>
-              <a href="#">Terms & conditions</a>
+              <a href="#" className="hover:underline">
+                Terms & conditions
+              </a>
             </li>
             <li>
-              <a href="#">Privacy Policy</a>
+              <a href="#" className="hover:underline">
+                Privacy Policy
+              </a>
             </li>
             <li>
-              <a href="#">Our Story</a>
-            </li>
-          </ul>
-        </div>
-        <div className="flex flex-col">
-          <ul>
-            <li>
-              <a href="#">Facebook</a>
-            </li>
-            <li>
-              <a href="#">Instagram</a>
-            </li>
-            <li>
-              <a href="#">Twitter</a>
+              <a href="#" className="hover:underline">
+                Our Story
+              </a>
             </li>
           </ul>
         </div>
-        <div className="flex flex-col">
-          <ul>
+        {/* Social Links */}
+        <div className="flex flex-col items-center md:items-start">
+          <ul className="space-y-2 text-center md:text-left">
             <li>
-              <a href="#">Kathmandu, Nepal</a>
+              <a href="#" className="hover:underline">
+                Facebook
+              </a>
             </li>
             <li>
-              <a href="#">+977-9862478661</a>
+              <a href="#" className="hover:underline">
+                Instagram
+              </a>
             </li>
             <li>
-              <a href="#">aviralale@gmail.com</a>
+              <a href="#" className="hover:underline">
+                Twitter
+              </a>
+            </li>
+          </ul>
+        </div>
+        {/* Contact Info */}
+        <div className="flex flex-col items-center md:items-start">
+          <ul className="space-y-2 text-center md:text-left">
+            <li>
+              <a href="#" className="hover:underline">
+                Kathmandu, Nepal
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:underline">
+                +977-9862478661
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:underline">
+                aviralale@gmail.com
+              </a>
             </li>
           </ul>
         </div>
       </div>
       <hr className="border border-white w-full" />
-
-      <div className="py-4">
-        <h1 className="text-sm">
+      <div className="py-4 text-center">
+        <h1 className="text-xs md:text-sm">
           &copy;2025 Karnali Yaks Restaurant & Bar | All Rights Reserved
         </h1>
       </div>

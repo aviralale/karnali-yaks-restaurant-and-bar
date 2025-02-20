@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import HeroCategories from "@/components/HeroCategories";
 import HeroMenu from "@/components/HeroMenu";
 
 const HomePage = () => {
@@ -18,6 +19,14 @@ const HomePage = () => {
         }}
       >
         <HeroMenu />
+        <section
+          className="bg-white"
+          style={{
+            padding: "2rem 15rem",
+          }}
+        >
+          <HeroCategories />
+        </section>
       </section>
     </main>
   );

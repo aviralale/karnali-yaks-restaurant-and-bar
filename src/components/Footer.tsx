@@ -85,7 +85,7 @@ const Footer = () => {
           <ul className="space-y-2 text-center md:text-left">
             <li>
               <a href="#" className="hover:underline">
-                Kathmandu, Nepal
+                La Cala de Mijas 📍
               </a>
             </li>
             <li>

@@ -64,7 +64,10 @@ const Footer = () => {
         <div className="flex flex-col items-center md:items-start">
           <ul className="space-y-2 text-center md:text-left">
             <li>
-              <a href="#" className="hover:underline">
+              <a
+                href="https://www.facebook.com/profile.php?id=100087118860418"
+                className="hover:underline"
+              >
                 Facebook
               </a>
             </li>
@@ -94,8 +97,11 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
-                aviralale@gmail.com
+              <a
+                href="mailto:info@karnaliyaksrestaurant.com"
+                className="hover:underline"
+              >
+                info@karnaliyaksrestaurant.com
               </a>
             </li>
           </ul>

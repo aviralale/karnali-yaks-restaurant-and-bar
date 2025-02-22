@@ -31,7 +31,7 @@ const Navbar = () => {
               <Link to="/">Our Story</Link>
             </li>
             <li className="font-semibold">
-              <Link to="/" className="flex items-center gap-2">
+              <Link to="/menu" className="flex items-center gap-2">
                 Menu <Menu size={20} />
               </Link>
             </li>

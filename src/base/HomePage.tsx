@@ -1,6 +1,8 @@
+import GoogleMaps from "@/components/GoogleMaps";
 import Hero from "@/components/Hero";
 import HeroCategories from "@/components/HeroCategories";
 import HeroMenu from "@/components/HeroMenu";
+import HomeLatest from "@/components/HomeLatest";
 
 const HomePage = () => {
   return (
@@ -27,6 +29,21 @@ const HomePage = () => {
         >
           <HeroCategories />
         </section>
+      </section>
+      <section
+        style={{
+          padding: "2rem 15rem",
+        }}
+      >
+        <HomeLatest />
+      </section>
+      <section
+        className="bg-white"
+        style={{
+          padding: "2rem 15rem",
+        }}
+      >
+        <GoogleMaps />
       </section>
     </main>
   );

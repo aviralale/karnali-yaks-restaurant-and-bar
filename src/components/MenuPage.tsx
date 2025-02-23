@@ -1,12 +1,20 @@
 import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import axios from "axios";
 
 interface DietaryTag {
   id: number;
   name: string;
   icon: string;
   description: string;
+}
+
+interface DietaryTags {
+  count: string;
+  next: string;
+  previous: string;
+  results: DietaryTag[];
 }
 
 interface Variation {
@@ -105,12 +113,17 @@ const MenuItemCard = ({ item }: { item: MenuItem }) => (
   >
     <div className="flex justify-between items-start">
       <div className="flex-1">
-        <h1 className="text-3xl font-extrabold flex items-center">
+        <h1
+          className="text-3xl font-extrabold flex items-center"
+          style={{
+            marginBottom: "0.5rem",
+          }}
+        >
           {item.order}. {item.name}
           {item.is_special && <span className="ml-2 text-red-500">★</span>}
         </h1>
         {item.name_spanish && (
-          <p className="text-gray-600 italic mt-1">{item.name_spanish}</p>
+          <em className="text-gray-600 italic mt-1">{item.name_spanish}</em>
         )}
         {item.description && (
           <p className="text-gray-700 mt-2">{item.description}</p>
@@ -120,7 +133,12 @@ const MenuItemCard = ({ item }: { item: MenuItem }) => (
             {item.description_spanish}
           </p>
         )}
-        <div className="mt-3 flex items-center">
+        <div
+          className="flex items-center"
+          style={{
+            marginTop: "0.5rem",
+          }}
+        >
           {item.dietary_tags.map((tag) => (
             <DietaryIcon key={tag.id} tag={tag} />
           ))}
@@ -215,8 +233,23 @@ const MenuContainer = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [dietaryTags, setDietaryTags] = useState<DietaryTags | null>(null);
 
   useEffect(() => {
+    const fetchDietaryTags = async () => {
+      try {
+        const response = await axios.get(
+          "http://127.0.0.1:8000/api/menu/dietary-tags/"
+        );
+        setDietaryTags(response.data);
+        setError(null);
+      } catch (err) {
+        setError("Error loading dietary tags. Please try again later.");
+        console.error("Error fetching dietary tags:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
     const fetchMenu = async () => {
       try {
         const response = await fetch(
@@ -234,6 +267,7 @@ const MenuContainer = () => {
       }
     };
     fetchMenu();
+    fetchDietaryTags();
   }, []);
 
   if (loading) {
@@ -258,7 +292,7 @@ const MenuContainer = () => {
 
   return (
     <div
-      className="w-full min-h-screen flex flex-col"
+      className="w-full min-h-screen flex flex-col "
       style={{
         margin: "auto",
         padding: "0 1.5rem",
@@ -271,24 +305,61 @@ const MenuContainer = () => {
       >
         <MenuFilter onSearch={setSearchQuery} />
       </div>
+
       <Tabs
         defaultValue={menuData.results[0]?.name || ""}
-        className="flex justify-center items-center"
+        className="flex flex-col justify-between items-center min-h-screen gap-20"
       >
-        <TabsList className="flex flex-wrap gap-6">
+        <TabsList className="flex flex-wrap gap-6 bg-transparent">
           {menuData.results.map((category) => (
             <TabsTrigger
               key={category.id}
               value={category.name}
-              className="text-center "
+              className="text-center text-lg font-semibold uppercase flex-1 min-w-[150px] mx-2 my-2 "
+              style={{
+                padding: "0 1rem",
+              }}
             >
-              {category.name}
+              <h1>{category.name}</h1>
             </TabsTrigger>
           ))}
         </TabsList>
+
         {menuData.results.map((category) => (
-          <TabsContent key={category.id} value={category.name}>
+          <TabsContent
+            key={category.id}
+            value={category.name}
+            className="  min-h-screen min-w-[60vw] bg-white shadow-lg"
+            style={{
+              padding: "2rem",
+              // margin: "0 0 5rem 0",
+            }}
+          >
             <CategorySection category={category} searchQuery={searchQuery} />
+            <div className="flex flex-col justify-center items-center">
+              <h1
+                className="text-4xl  font-bold"
+                style={{
+                  marginBottom: "0.5rem",
+                }}
+              >
+                Dietary Tags
+              </h1>
+              <div className="flex flex-wrap gap-4">
+                {dietaryTags?.results.map((dietaryTag) => (
+                  <div
+                    key={dietaryTag.id}
+                    className=" flex"
+                    style={{
+                      padding: "0 1rem",
+                    }}
+                  >
+                    <DietaryIcon tag={dietaryTag} />
+                    <h1 className="text-lg font-bold">{dietaryTag.name}</h1>
+                  </div>
+                ))}
+              </div>
+            </div>
           </TabsContent>
         ))}
       </Tabs>

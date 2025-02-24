@@ -239,7 +239,7 @@ const MenuContainer = () => {
     const fetchDietaryTags = async () => {
       try {
         const response = await axios.get(
-          "http://127.0.0.1:8000/api/menu/dietary-tags/"
+          "https://api.karnaliyaksrestaurant.com/api/menu/dietary-tags/"
         );
         setDietaryTags(response.data);
         setError(null);
@@ -253,7 +253,7 @@ const MenuContainer = () => {
     const fetchMenu = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/api/menu/categories/"
+          "https://api.karnaliyaksrestaurant.com/api/menu/categories/"
         );
         if (!response.ok) throw new Error("Failed to fetch menu data");
         const data = await response.json();

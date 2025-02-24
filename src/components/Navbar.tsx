@@ -16,13 +16,13 @@ const Navbar = () => {
             <li className="font-semibold">Asian | Mexican Fusion</li>
             <li className="font-semibold">Health & Wellness</li>
           </ul>
-          <div className="flex-1 flex justify-center items-center">
+          <Link to="/" className="flex-1 flex justify-center items-center">
             <img
               src={Logo}
               alt="Karnali Yaks Restaurant and Bar Logo"
               className="w-20"
             />
-          </div>
+          </Link>
           <ul className="flex-1 flex items-center justify-evenly">
             <li className="font-semibold">
               <Link to="/">Gallery</Link>

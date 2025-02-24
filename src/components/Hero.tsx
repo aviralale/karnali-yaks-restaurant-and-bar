@@ -27,7 +27,7 @@ const Hero = () => {
       </h1>
 
       <Link
-        to="/"
+        to="/menu"
         className="bg-black text-white w-32 h-32 rounded-full flex justify-center items-center text-center  hover:shadow-2xl"
       >
         Explore <br /> Dishes

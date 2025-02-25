@@ -1,238 +1,15 @@
 import { useState, useEffect } from "react";
-import { Search } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import axios from "axios";
-
-interface DietaryTag {
-  id: number;
-  name: string;
-  icon: string;
-  description: string;
-}
-
-interface DietaryTags {
-  count: string;
-  next: string;
-  previous: string;
-  results: DietaryTag[];
-}
-
-interface Variation {
-  id: number;
-  name: string;
-  price: string;
-}
-
-interface MenuItem {
-  id: number;
-  name: string;
-  name_spanish: string;
-  description: string;
-  description_spanish: string;
-  price: string;
-  category: number;
-  category_name: string;
-  dietary_tags: DietaryTag[];
-  variations: Variation[];
-  spice_level: number | null;
-  is_special: boolean;
-  order: number;
-}
-
-interface MenuCategory {
-  id: number;
-  name: string;
-  es_name: string;
-  description: string;
-  items: MenuItem[];
-}
-
-interface MenuResponse {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: MenuCategory[];
-}
-
-const DietaryIcon = ({ tag }: { tag: DietaryTag }) => (
-  <div
-    className={`inline-flex items-center rounded-full ${
-      tag.name == "Molluscs"
-        ? "bg-blue-500"
-        : tag.name == "Gluten"
-        ? "bg-yellow-600"
-        : tag.name == "Egg"
-        ? "bg-orange-500"
-        : tag.name == "Fish"
-        ? "bg-blue-700"
-        : tag.name == "Peanuts"
-        ? "bg-amber-900"
-        : tag.name == "Soy"
-        ? "bg-green-600"
-        : tag.name == "Dairy"
-        ? "bg-amber-950"
-        : tag.name == "Nuts"
-        ? "bg-red-400"
-        : tag.name == "celery"
-        ? "bg-green-500"
-        : tag.name == "Crustaceans"
-        ? "bg-blue-800"
-        : tag.name == "Sesame"
-        ? "bg-yellow-700"
-        : tag.name == "Mustard"
-        ? "bg-red-500"
-        : tag.name == "Sulphites"
-        ? "bg-orange-600"
-        : tag.name == "Lupins"
-        ? "bg-green-700"
-        : "bg-transparent"
-    }`}
-    style={{
-      marginRight: "0.5rem",
-      padding: "0.25rem",
-    }}
-    title={tag.name}
-  >
-    <img
-      src={tag.icon}
-      alt={tag.name}
-      className={`w-4 h-4 object-contain`}
-      style={{
-        filter: "invert(1)",
-      }}
-    />
-  </div>
-);
-
-const MenuItemCard = ({ item }: { item: MenuItem }) => (
-  <div
-    className="border-b border-gray-200 last:border-b-0"
-    style={{
-      padding: "1.5rem 0",
-    }}
-  >
-    <div className="flex justify-between items-start">
-      <div className="flex-1">
-        <h1
-          className="text-3xl font-extrabold flex items-center"
-          style={{
-            marginBottom: "0.5rem",
-          }}
-        >
-          {item.order}. {item.name}
-          {item.is_special && <span className="ml-2 text-red-500">★</span>}
-        </h1>
-        {item.name_spanish && (
-          <em className="text-gray-600 italic mt-1">{item.name_spanish}</em>
-        )}
-        {item.description && (
-          <p className="text-gray-700 mt-2">{item.description}</p>
-        )}
-        {item.description_spanish && (
-          <p className="text-gray-600 italic mt-1">
-            {item.description_spanish}
-          </p>
-        )}
-        <div
-          className="flex items-center"
-          style={{
-            marginTop: "0.5rem",
-          }}
-        >
-          {item.dietary_tags.map((tag) => (
-            <DietaryIcon key={tag.id} tag={tag} />
-          ))}
-        </div>
-      </div>
-      <div className="text-right ml-8">
-        {item.price && <p className="text-xl font-bold">{item.price}€</p>}
-        {item.variations.map((variation) => (
-          <div key={variation.id} className="text-gray-700 mt-1">
-            <span>{variation.name}: </span>
-            <span className="font-medium">{variation.price}€</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-);
-
-const CategorySection = ({
-  category,
-  searchQuery,
-}: {
-  category: MenuCategory;
-  searchQuery: string;
-}) => {
-  const filteredItems = category.items.filter(
-    (item) =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.name_spanish.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.description_spanish.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  return (
-    <div
-      style={{
-        marginBottom: "3rem",
-      }}
-    >
-      {filteredItems.length > 0 ? (
-        filteredItems.map((item) => <MenuItemCard key={item.id} item={item} />)
-      ) : (
-        <p className="text-gray-500 text-lg">
-          No items found for this category.
-        </p>
-      )}
-    </div>
-  );
-};
-
-const MenuFilter = ({ onSearch }: { onSearch: (query: string) => void }) => (
-  <div
-    className="relative"
-    style={{
-      marginBottom: "3rem",
-    }}
-  >
-    <input
-      type="text"
-      placeholder="Search menu..."
-      onChange={(e) => onSearch(e.target.value)}
-      className="w-full p-4 pl-12 text-xl border-2 border-black rounded-none outline-none"
-      style={{
-        padding: "1rem",
-        paddingLeft: "3rem",
-      }}
-    />
-    <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-6 w-6" />
-  </div>
-);
-
-const LoadingSkeleton = () => (
-  <div className="space-y-12">
-    {[1, 2, 3].map((i) => (
-      <div key={i} className="animate-pulse">
-        <div className="h-8 w-48 bg-gray-200 mb-6" />
-        <div className="space-y-6">
-          {[1, 2].map((j) => (
-            <div key={j} className="py-6 border-b border-gray-200">
-              <div className="h-6 w-3/4 bg-gray-200 mb-4" />
-              <div className="h-4 w-1/2 bg-gray-200" />
-            </div>
-          ))}
-        </div>
-      </div>
-    ))}
-  </div>
-);
+import { DietaryTags, MenuResponse } from "@/lib/types";
+import DietaryIcon from "./DietaryIcon";
+import LoadingSkeleton from "./LoadingSkeleton";
+import CategorySection from "./CategorySection";
 
 const MenuContainer = () => {
   const [menuData, setMenuData] = useState<MenuResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
   const [dietaryTags, setDietaryTags] = useState<DietaryTags | null>(null);
 
   useEffect(() => {
@@ -292,20 +69,12 @@ const MenuContainer = () => {
 
   return (
     <div
-      className="w-full min-h-screen flex flex-col "
+      className="w-full min-h-screen flex flex-col"
       style={{
-        margin: "auto",
+        margin: "3rem auto 3rem 0",
         padding: "0 1.5rem",
       }}
     >
-      <div
-        style={{
-          display: "none",
-        }}
-      >
-        <MenuFilter onSearch={setSearchQuery} />
-      </div>
-
       <Tabs
         defaultValue={menuData.results[0]?.name || ""}
         className="flex flex-col justify-between items-center min-h-screen gap-20"
@@ -315,8 +84,9 @@ const MenuContainer = () => {
             <TabsTrigger
               key={category.id}
               value={category.name}
-              className="text-center text-lg font-semibold uppercase flex-1 min-w-[150px] mx-2 my-2 "
+              className="text-center text-lg font-semibold uppercase flex-1 min-w-[150px]"
               style={{
+                margin: "0.5rem",
                 padding: "0 1rem",
               }}
             >
@@ -329,35 +99,49 @@ const MenuContainer = () => {
           <TabsContent
             key={category.id}
             value={category.name}
-            className="  min-h-screen min-w-[60vw] bg-white shadow-lg"
+            className="min-h-screen min-w-[60vw] relative shadow-xl rounded-lg overflow-hidden"
             style={{
               padding: "2rem",
-              // margin: "0 0 5rem 0",
             }}
           >
-            <CategorySection category={category} searchQuery={searchQuery} />
-            <div className="flex flex-col justify-center items-center">
-              <h1
-                className="text-4xl  font-bold"
+            <div className="absolute inset-0 bg-amber-50 opacity-90"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-50 to-white opacity-80"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(#f3f3f3_1px,transparent_1px)] bg-[size:20px_20px] opacity-30"></div>
+            <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(0,0,0,0.02)_25%,transparent_25%,transparent_50%,rgba(0,0,0,0.02)_50%,rgba(0,0,0,0.02)_75%,transparent_75%,transparent)] bg-[size:20px_20px] opacity-20"></div>
+            <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-amber-100 to-transparent opacity-40"></div>
+            <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-amber-100 to-transparent opacity-40"></div>
+            <div className="relative z-10">
+              <CategorySection category={category} />
+
+              <div
+                className="flex flex-col justify-center items-center  border-t border-amber-200"
                 style={{
-                  marginBottom: "0.5rem",
+                  marginTop: "3rem",
+                  paddingTop: "2rem",
                 }}
               >
-                Dietary Tags
-              </h1>
-              <div className="flex flex-wrap gap-4">
-                {dietaryTags?.results.map((dietaryTag) => (
-                  <div
-                    key={dietaryTag.id}
-                    className=" flex"
-                    style={{
-                      padding: "0 1rem",
-                    }}
-                  >
-                    <DietaryIcon tag={dietaryTag} />
-                    <h1 className="text-lg font-bold">{dietaryTag.name}</h1>
-                  </div>
-                ))}
+                <h1
+                  className="text-4xl font-bold  text-amber-800"
+                  style={{
+                    marginBottom: "1.5rem",
+                  }}
+                >
+                  Dietary Tags
+                </h1>
+                <div className="flex flex-wrap gap-4 justify-center">
+                  {dietaryTags?.results.map((dietaryTag) => (
+                    <div
+                      key={dietaryTag.id}
+                      className="flex items-center bg-white bg-opacity-70 rounded-full shadow-sm"
+                      style={{
+                        padding: "0.5rem 1rem",
+                      }}
+                    >
+                      <DietaryIcon tag={dietaryTag} />
+                      <h1 className="text-lg font-bold">{dietaryTag.name}</h1>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </TabsContent>

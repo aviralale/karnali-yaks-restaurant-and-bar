@@ -41,3 +41,10 @@ export interface MenuResponse {
   previous: string | null;
   results: MenuCategory[];
 }
+
+export interface DietaryTags {
+  count: string;
+  next: string;
+  previous: string;
+  results: DietaryTag[];
+}

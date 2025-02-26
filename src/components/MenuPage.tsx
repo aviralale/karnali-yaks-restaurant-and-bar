@@ -79,12 +79,12 @@ const MenuContainer = () => {
         defaultValue={menuData.results[0]?.name || ""}
         className="flex flex-col justify-between items-center min-h-screen gap-20"
       >
-        <TabsList className="flex flex-wrap gap-6 bg-transparent">
+        <TabsList className="flex flex-wrap gap-6 h-full bg-transparent">
           {menuData.results.map((category) => (
             <TabsTrigger
               key={category.id}
               value={category.name}
-              className="text-center text-lg font-semibold uppercase flex-1 min-w-[150px]"
+              className="text-center text-lg font-semibold uppercase min-w-[150px]"
               style={{
                 margin: "0.5rem",
                 padding: "0 1rem",

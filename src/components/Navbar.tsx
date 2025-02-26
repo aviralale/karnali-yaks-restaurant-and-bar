@@ -25,10 +25,10 @@ const Navbar = () => {
           </Link>
           <ul className="flex-1 flex items-center justify-evenly">
             <li className="font-semibold">
-              <Link to="/">Gallery</Link>
+              <Link to="/gallery">Gallery</Link>
             </li>
             <li className="font-semibold">
-              <Link to="/">Our Story</Link>
+              <Link to="/our-story">Our Story</Link>
             </li>
             <li className="font-semibold">
               <Link to="/menu" className="flex items-center gap-2">
@@ -77,28 +77,28 @@ const Navbar = () => {
         >
           <ul className="flex flex-col py-6 px-8">
             <li className="py-3">
-              <a
-                href="#"
+              <Link
+                to="/gallery"
                 className="font-semibold flex items-center justify-between hover:text-gray-600 transition-colors duration-200"
               >
                 Gallery
-              </a>
+              </Link>
             </li>
             <li className="py-3 border-t border-gray-100">
-              <a
-                href="#"
+              <Link
+                to="/our-story"
                 className="font-semibold flex items-center justify-between hover:text-gray-600 transition-colors duration-200"
               >
-                Services
-              </a>
+                Our Story
+              </Link>
             </li>
             <li className="py-3 border-t border-gray-100">
-              <a
-                href="#"
+              <Link
+                to="/menu"
                 className="font-semibold flex items-center justify-between hover:text-gray-600 transition-colors duration-200"
               >
                 Menu
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

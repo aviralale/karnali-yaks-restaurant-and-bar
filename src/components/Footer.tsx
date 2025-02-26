@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 
 const Footer = () => {
@@ -24,9 +25,9 @@ const Footer = () => {
         <div className="flex flex-col items-center md:items-start">
           <ul className="space-y-2 flex flex-col text-center md:text-left">
             <li>
-              <a href="#" className="hover:underline">
+              <Link to="/our-story" className="hover:underline">
                 About Us
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#" className="hover:underline">
@@ -54,9 +55,9 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
+              <Link to="/our-story" className="hover:underline">
                 Our Story
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -65,7 +66,7 @@ const Footer = () => {
           <ul className="space-y-2 text-center md:text-left">
             <li>
               <a
-                href="https://www.facebook.com/profile.php?id=100087118860418"
+                href="https://www.facebook.com/everestfusiones"
                 className="hover:underline"
               >
                 Facebook
@@ -92,16 +93,16 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
-                +977-9862478661
+              <a href="tel:+34-632989163" className="hover:underline">
+                +34-632989163
               </a>
             </li>
             <li>
               <a
-                href="mailto:info@karnaliyaksrestaurant.com"
+                href="mailto:karnaliyaksrestaurant@gmail.com"
                 className="hover:underline"
               >
-                info@karnaliyaksrestaurant.com
+                karnaliyaksrestaurant@gmail.com
               </a>
             </li>
           </ul>

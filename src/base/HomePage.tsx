@@ -4,6 +4,9 @@ import Hero from "@/components/Hero";
 import HeroCategories from "@/components/HeroCategories";
 import HeroMenu from "@/components/HeroMenu";
 import HomeLatest from "@/components/HomeLatest";
+import Gallery from "./Gallery";
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 
 const HomePage = () => {
   // Animation variants for sections
@@ -12,7 +15,7 @@ const HomePage = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
+      transition: { duration: 1.2, ease: "easeOut" },
     }, // Animate into view
   };
 
@@ -25,7 +28,7 @@ const HomePage = () => {
         whileInView="visible"
         viewport={{ once: true }} // Trigger animation only once when in view
         style={{
-          padding: "2rem 15rem",
+          padding: "2rem 0",
         }}
       >
         <Hero />
@@ -39,7 +42,7 @@ const HomePage = () => {
         viewport={{ once: true }}
         className="bg-white"
         style={{
-          padding: "2rem 15rem",
+          padding: "2rem 1rem",
         }}
       >
         <HeroMenu />
@@ -53,10 +56,26 @@ const HomePage = () => {
         whileInView="visible"
         viewport={{ once: true }}
         style={{
-          padding: "2rem 15rem",
+          padding: "2rem 0",
         }}
       >
         <HomeLatest />
+      </motion.section>
+      <motion.section
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="flex flex-col justify-center items-center"
+        style={{
+          padding: "2rem 0",
+          marginBottom: "2rem",
+        }}
+      >
+        <Gallery isHomePage />
+        <Link to="/gallery" className="text-xl uppercase text-center flex">
+          View Gallery <ArrowUpRight />{" "}
+        </Link>
       </motion.section>
 
       {/* GoogleMaps Section */}
@@ -67,7 +86,7 @@ const HomePage = () => {
         viewport={{ once: true }}
         className="bg-white"
         style={{
-          padding: "2rem 15rem",
+          padding: "2rem 1rem",
         }}
       >
         <GoogleMaps />

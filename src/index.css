@@ -149,3 +149,20 @@ h1 {
     @apply bg-background text-foreground;
   }
 }
+
+/* Masonry grid styles */
+.masonry-grid {
+  display: flex;
+  margin-left: -16px; /* Adjust spacing between columns */
+  width: auto;
+}
+
+.masonry-grid_column {
+  padding-left: 16px; /* Adjust spacing between columns */
+  background-clip: padding-box;
+}
+
+/* Ensure images and videos fill their containers */
+.masonry-grid_column > div {
+  margin-bottom: 16px; /* Adjust spacing between items */
+}

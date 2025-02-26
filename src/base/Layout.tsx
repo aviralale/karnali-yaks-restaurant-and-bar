@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import WhatsAppButton from "@/components/Whatsapp";
 
 type LayoutProps = {
   children: ReactNode;
@@ -15,6 +16,7 @@ const Layout = ({ children }: LayoutProps) => {
       </div>
       <hr className="border border-white w-full" />
       <Footer />
+      <WhatsAppButton />
     </>
   );
 };

@@ -82,7 +82,7 @@ const Navbar = () => {
           </ul>
         </div>
         {/* Mobile Navigation */}
-        <div className="md:hidden flex justify-between items-center">
+        <div className="md:hidden w-full flex justify-between items-center">
           <Link to="/">
             <img
               src={Logo}
@@ -90,7 +90,15 @@ const Navbar = () => {
               className="w-16"
             />
           </Link>
-          <p className="font-semibold">Asian | Mexican Fusion</p>
+          <Link
+            to="/"
+            className="text-lg"
+            style={{
+              fontWeight: 900,
+            }}
+          >
+            <h1>Karnali Yaks Restaurant & Bar</h1>
+          </Link>
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"

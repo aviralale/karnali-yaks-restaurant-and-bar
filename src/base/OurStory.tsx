@@ -43,7 +43,7 @@ const OurStory = () => {
       <div className="absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-amber-500/10 blur-3xl"></div>
 
       <div
-        className="container mx-auto relative z-10"
+        className="container mx-auto relative "
         style={{ paddingLeft: "1rem", paddingRight: "1rem" }}
       >
         <motion.div

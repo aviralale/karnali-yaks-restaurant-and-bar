@@ -374,7 +374,7 @@ const MenuContainer = () => {
                               <DietaryIcon tag={dietaryTag} />
                             </div>
                             <span className="font-medium text-gray-800">
-                              {dietaryTag.name}
+                              {dietaryTag.name}({dietaryTag.es_name})
                             </span>
                           </div>
                         ))}

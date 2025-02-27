@@ -1,6 +1,7 @@
 export interface DietaryTag {
   id: number;
   name: string;
+  es_name: string;
   icon: string;
   description: string;
 }

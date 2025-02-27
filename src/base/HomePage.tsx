@@ -4,7 +4,7 @@ import GoogleMaps from "@/components/GoogleMaps";
 import Hero from "@/components/Hero";
 import HeroCategories from "@/components/HeroCategories";
 import HeroMenu from "@/components/HeroMenu";
-import HomeLatest from "@/components/HomeLatest";
+// import HomeLatest from "@/components/HomeLatest";
 import Gallery from "./Gallery";
 import { ChevronDown } from "lucide-react";
 
@@ -122,7 +122,7 @@ const HomePage = () => {
       <motion.section
         id="hero-section"
         ref={heroSectionRef}
-        className="parallax-section relative p-0 h-screen overflow-hidden"
+        className="parallax-section relative h-screen overflow-hidden"
         variants={sectionVariants}
       >
         <Hero />
@@ -135,10 +135,15 @@ const HomePage = () => {
           onClick={scrollToNextSection}
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center cursor-pointer z-10"
         >
-          <span className="text-white mb-2 text-sm font-medium">
+          <span
+            className=" text-sm font-medium"
+            style={{
+              marginBottom: "0.5rem",
+            }}
+          >
             Scroll to explore
           </span>
-          <ChevronDown size={24} color="#fff" />
+          <ChevronDown size={24} />
         </motion.div>
       </motion.section>
 
@@ -171,14 +176,14 @@ const HomePage = () => {
         className="parallax-section py-20 px-4 bg-gradient-to-br from-blue-50 to-gray-100 relative"
         variants={fadeInVariants}
       >
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-        >
-          <HomeLatest />
-        </motion.div>
+        {/* <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+          >
+            <HomeLatest />
+          </motion.div> */}
       </motion.section>
 
       {/* Gallery Section with staggered image reveal */}

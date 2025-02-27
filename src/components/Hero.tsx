@@ -62,7 +62,7 @@ const Hero = () => {
         </div>
 
         <div
-          className="w-36 h-36 md:w-40 md:h-40 lg:w-56 lg:h-56 bg-no-repeat bg-cover bg-center flex items-center order-2 md:order-3"
+          className="w-36 h-36 md:w-40 md:h-40 lg:w-56 hidden lg:h-56 bg-no-repeat bg-cover bg-center md:flex items-center order-2 md:order-3"
           style={{
             backgroundImage: `url(${Blob2Img})`,
           }}

@@ -8,7 +8,12 @@ const HeroMenu = () => {
     <div className="flex flex-col md:flex-row justify-between gap-8 px-4 py-6 md:py-8">
       {/* Left Section */}
       <div className="flex flex-col justify-center gap-5 w-full md:w-1/2">
-        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-9xl font-bold flex flex-col border-b-2 border-b-black pb-4">
+        <h1
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-9xl font-bold flex flex-col border-b-2 border-b-black "
+          style={{
+            padding: "1rem",
+          }}
+        >
           <span className="flex flex-col md:flex-row items-start md:items-end gap-4 relative">
             EXPERIENCE OF REAL RECIPES TASTE
             <img

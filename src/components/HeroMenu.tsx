@@ -51,12 +51,6 @@ const HeroMenu = () => {
               largo y caudaloso de Nepal, el río Karnali.
             </em>
           </span>
-          <Link
-            className="underline whitespace-nowrap font-semibold text-sm md:text-base"
-            to="/menu"
-          >
-            VIEW ALL
-          </Link>
         </div>
       </div>
 
